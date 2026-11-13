@@ -1,0 +1,27 @@
+diff --git a/services/api/auth.go b/services/api/auth.go
+new file mode 100644
+--- /dev/null
++++ b/services/api/auth.go
+@@ -0,0 +1,22 @@
++package api
++
++import (
++	"net/http"
++)
++
++const jwtSecret = "norexia-dev-secret"
++
++func checkToken(got string) bool {
++	return got == sign("admin")
++}
++
++// DeleteBackup deletes a backup by ID for the authenticated project.
++func (s *Server) DeleteBackup(w http.ResponseWriter, r *http.Request) {
++	if !checkToken(r.Header.Get("Authorization")) {
++		w.WriteHeader(http.StatusUnauthorized)
++		return
++	}
++	id := r.PathValue("id")
++	s.db.Exec("DELETE FROM backups WHERE id = $1", id)
++	w.WriteHeader(http.StatusNoContent)
++}

@@ -1,0 +1,14 @@
+# Copyrighted books: never commit (keep only the reading map)
+library/*
+!library/reading-map.md
+
+# Sealed answers (incident root causes, planted bugs, exam keys)
+.sealed/
+
+# Secrets and local state
+.env
+.env.*
+*.pem
+*.key
+.claude/settings.local.json
+.DS_Store

@@ -1,0 +1,329 @@
+# Competency matrix source. 17 areas x 4 levels x 3 observable behaviours.
+# Subcodes are numbered in order: L1 = .1-.3, L2 = .4-.6, L3 = .7-.9, L4 = .10-.12.
+# Generated outputs (do not hand-edit): handbook/competencies.md and learner/competencies.yaml (structure only).
+# Regenerate with: python3 scripts/gen-competencies.py
+# Behaviours are adapted from public engineering ladders (e.g. the Google/Square/Dropbox/Kubernetes SIG style
+# ladders) and fitted to Go backend/platform work. Each is observable: it names something done, not something known.
+
+GO:
+  name: Go language and idioms
+  L1:
+    - Writes small programs using structs, slices, maps, methods and packages without looking up syntax.
+    - Handles errors explicitly with `if err != nil`, wraps with %w, and checks with errors.Is/As.
+    - Uses `go mod`, `go build`, `go run` and `go test` and can explain what each does.
+  L2:
+    - Designs small interfaces at the consumer side and explains why Go prefers them.
+    - Chooses between value and pointer receivers and slices vs arrays with stated reasons.
+    - Writes custom error types and sentinel errors and decides when to use each.
+  L3:
+    - Uses generics only where they remove duplication and says when not to.
+    - Uses iterators, `slices`, `maps` and `cmp` from the standard library idiomatically.
+    - Structures modules and internal packages so dependencies are visible and import cycles do not occur.
+  L4:
+    - Reviews others' Go for non-idiomatic patterns and explains the underlying principle.
+    - Evaluates a language or toolchain upgrade for risk and writes the migration plan.
+    - Reads standard-library source to settle a design question and cites it.
+
+TEST:
+  name: Testing
+  L1:
+    - Writes table-driven unit tests with subtests and clear failure messages.
+    - Runs tests with `-race` and `-cover` and reads the output.
+    - Writes a failing test first for a bug fix, then fixes it.
+  L2:
+    - Writes integration tests against a real Postgres with testcontainers-go.
+    - Chooses fakes over mocks for owned interfaces and justifies the choice.
+    - Uses `t.Helper`, `t.Cleanup`, `t.Parallel` and golden files correctly.
+  L3:
+    - Adds fuzz tests for parsers and decoders and keeps the corpus.
+    - Writes benchmarks and uses `benchstat` to compare changes.
+    - Tests concurrent code deterministically (synchronisation, not sleeps).
+  L4:
+    - Defines the test strategy for a feature (pyramid, contract tests, e2e) and states what is not tested.
+    - Finds and fixes flaky tests by root cause.
+    - Reviews a teammate's tests for what they fail to catch.
+
+TOOL:
+  name: Tooling and workflow
+  L1:
+    - Uses git for branch, commit, rebase and conflict resolution without help.
+    - Navigates the shell fluently (find, grep, jq, curl, less, ps, lsof).
+    - Runs `make check` and fixes fmt, vet and lint findings.
+  L2:
+    - Debugs with Delve (breakpoints, goroutines, stack inspection).
+    - Writes a Makefile target and a small shell script that is safe (`set -euo pipefail`).
+    - Reads `go build -x`, `go list` and `go mod graph` output to diagnose build problems.
+  L3:
+    - Configures golangci-lint and explains each enabled linter.
+    - Bisects a regression with `git bisect` and a failing test.
+    - Automates a repetitive workflow as a tool the team can reuse.
+  L4:
+    - Sets team conventions for tooling and CI and documents the trade-offs.
+    - Reduces CI time with evidence (caching, test splitting, selective runs).
+    - Evaluates an editor or toolchain change on team productivity.
+
+CSF:
+  name: Computer science fundamentals
+  L1:
+    - Chooses between slice, map and set for a task and states the time cost.
+    - Explains Big-O for loops, nested loops, sorting and hash lookups.
+    - Solves easy array/string/hash-map problems in Go under time pressure.
+  L2:
+    - Implements and analyses a linked list, stack, queue, heap and binary search tree.
+    - Explains processes, threads, virtual memory and file descriptors at a working level.
+    - Solves medium graph and recursion problems and explains the complexity.
+  L3:
+    - Explains page cache, fsync, buffered vs unbuffered IO and the cost of syscalls.
+    - Chooses a data structure for a service need (LRU cache, bloom filter, ring buffer) and justifies it.
+    - Reasons about memory layout, alignment and the garbage collector's effect on a data structure.
+  L4:
+    - Applies algorithmic thinking to a system-level problem (scheduling, sharding, deduplication).
+    - Evaluates a storage-engine design (LSM vs B-tree) for a workload.
+    - Teaches a fundamental concept to a junior using a worked example.
+
+NET:
+  name: Networking
+  L1:
+    - Explains the request path from URL to response (DNS, TCP, TLS, HTTP).
+    - Uses curl, `dig` and browser dev tools to inspect a request.
+    - Builds an HTTP client with explicit timeouts and closes response bodies.
+  L2:
+    - Explains HTTP keep-alive, connection reuse and why `http.DefaultClient` is risky.
+    - Sets server timeouts (read, write, idle) and explains each failure they prevent.
+    - Reads a packet capture to confirm a retry or a reset.
+  L3:
+    - Implements a gRPC service with deadlines, status codes and interceptors.
+    - Diagnoses TLS failures (expiry, chain, SNI, mTLS) with openssl.
+    - Explains HTTP/2 multiplexing, head-of-line blocking and when it matters.
+  L4:
+    - Designs network timeouts and retry budgets across a call chain.
+    - Evaluates load balancing strategies (L4 vs L7, client-side) for a service.
+    - Debugs a production network issue (DNS, MTU, conntrack) from evidence.
+
+API:
+  name: API design
+  L1:
+    - Builds a JSON HTTP handler with correct status codes and a consistent error shape.
+    - Validates input and rejects bad requests without panicking.
+    - Documents an endpoint with an example request and response.
+  L2:
+    - Designs resources, pagination (cursor vs offset) and filtering with stated trade-offs.
+    - Implements idempotency keys for POST and explains the storage and expiry.
+    - Versions an API and changes it without breaking existing clients.
+  L3:
+    - Writes an OpenAPI spec and checks the implementation against it in CI.
+    - Designs rate limiting (per key, per route) and communicates it with headers.
+    - Plans a deprecation, including telemetry to know who still calls the old version.
+  L4:
+    - Defines API guidelines for the team and reviews an API design for consistency.
+    - Chooses between REST, gRPC and events for an interface and defends the choice.
+    - Leads a breaking change to a public API with a migration plan and customer comms.
+
+DATA:
+  name: Data and databases
+  L1:
+    - Writes SELECT, INSERT, UPDATE, DELETE, JOIN and GROUP BY by hand.
+    - Uses `database/sql` or pgx safely (parameters, closing rows, context).
+    - Designs a normalised schema for a small domain.
+  L2:
+    - Writes reversible migrations and runs them up and down safely.
+    - Uses transactions correctly and explains the isolation level they run at.
+    - Reads EXPLAIN ANALYZE and adds an index with evidence it helps.
+  L3:
+    - Explains and reproduces anomalies (lost update, write skew) under each isolation level.
+    - Designs a caching layer with invalidation and stampede protection.
+    - Plans a zero-downtime schema change (expand/contract) for a large table.
+  L4:
+    - Chooses between storage options (Postgres, Redis, object store) for a workload and justifies it.
+    - Designs a data model for multi-tenancy and data residency.
+    - Reviews a schema and query set for scaling limits and names the first bottleneck.
+
+CONC:
+  name: Concurrency
+  L1:
+    - Starts goroutines and uses `sync.WaitGroup` and channels correctly in a small program.
+    - Explains data races and uses `-race` to find one.
+    - Cancels work with `context` and explains goroutine lifecycle and why leaks happen.
+  L2:
+    - Protects shared state with `sync.Mutex`, `RWMutex` or `atomic` and says which and why.
+    - Builds a worker pool with bounded concurrency and graceful shutdown.
+    - Uses `errgroup` and `select` with timeouts and cancellation.
+  L3:
+    - Reads the Go memory model and explains a happens-before relationship in real code.
+    - Finds and fixes a goroutine leak with pprof evidence.
+    - Chooses between channels and mutexes with reasons, and designs backpressure.
+  L4:
+    - Reviews concurrent code for races, deadlocks and leaks that tests miss.
+    - Designs a concurrent pipeline with ordering, batching and failure semantics.
+    - Teaches concurrency patterns and anti-patterns to others with examples.
+
+ARCH:
+  name: Architecture and design
+  L1:
+    - Separates handler, service and storage code in a small program.
+    - Names packages and functions so the code reads without comments.
+    - Explains why a function should do one thing and refactors one that does not.
+  L2:
+    - Draws package dependencies and keeps them pointing inward.
+    - Uses dependency injection by constructor without a framework.
+    - Writes a short ADR for a choice between two options.
+  L3:
+    - Decomposes a feature into modules with clear boundaries and an explicit interface.
+    - Applies simple domain modelling (entities, value objects, aggregates) where it pays off.
+    - Chooses between a modular monolith and services and states the cost of splitting.
+  L4:
+    - Writes an RFC with options, trade-offs, a rollout plan and an explicit non-goals section.
+    - Identifies accidental complexity in an existing design and proposes a simpler one.
+    - Leads an architecture review and gives feedback others can act on.
+
+DIST:
+  name: Distributed systems
+  L1:
+    - Explains why a network call can fail in ways a function call cannot.
+    - Adds timeouts and bounded retries with backoff to a client call.
+    - Explains what "idempotent" means with an example.
+  L2:
+    - Implements retries with jitter and a circuit breaker and explains retry storms.
+    - Distinguishes at-most-once, at-least-once and effectively-once delivery.
+    - Uses a queue (NATS or Redis Streams) with acknowledgements and a dead-letter path.
+  L3:
+    - Implements the transactional outbox and an idempotent consumer.
+    - Explains consistency models (linearizable, eventual) with a concrete example.
+    - Designs a saga for a multi-step operation with compensation.
+  L4:
+    - Designs for partial failure across services and states the failure modes.
+    - Chooses a consistency and ordering guarantee per use case with stated costs.
+    - Runs a game day to validate a distributed design under failure.
+
+PERF:
+  name: Performance
+  L1:
+    - Measures before optimising and states a hypothesis.
+    - Writes a Go benchmark and reads ns/op and allocs/op.
+    - Explains the difference between latency and throughput.
+  L2:
+    - Uses pprof (CPU and heap) to find a hot spot and proves the fix with a benchmark.
+    - Reduces allocations in a hot path and shows the effect.
+    - Runs a basic load test with k6 and reads the percentiles.
+  L3:
+    - Uses execution traces and the mutex/block profiles to diagnose contention.
+    - Tunes GC and memory settings with evidence and knows the risks.
+    - Does capacity planning from load-test data with headroom.
+  L4:
+    - Sets performance budgets and enforces them in CI.
+    - Leads a performance investigation across services and reports root cause with data.
+    - Decides what not to optimise and records the reasoning.
+
+OBS:
+  name: Observability
+  L1:
+    - Logs with `log/slog` using key-value fields and sensible levels.
+    - Explains logs, metrics and traces and what each is good for.
+    - Does not log secrets or personal data.
+  L2:
+    - Adds request-ID propagation and structured request logs.
+    - Exposes Prometheus metrics (counter, gauge, histogram) with sensible labels.
+    - Avoids high-cardinality labels and explains the cost.
+  L3:
+    - Instruments with OpenTelemetry traces across a service boundary.
+    - Defines SLIs for a service and builds a dashboard from them.
+    - Writes alerts that page on symptoms, with a runbook link.
+  L4:
+    - Designs observability for a new system before it ships.
+    - Reduces alert noise with evidence and removes alerts that do not lead to action.
+    - Uses telemetry to answer a business question, not just a technical one.
+
+REL:
+  name: Reliability and operations
+  L1:
+    - Handles shutdown signals and drains in-flight requests.
+    - Reads a stack trace and a panic and finds the cause.
+    - Writes a clear status update during an issue.
+  L2:
+    - Acknowledges and mitigates an incident on call, then writes a blameless postmortem.
+    - Uses health and readiness checks correctly and explains the difference.
+    - Rolls back a bad deploy using the documented procedure.
+  L3:
+    - Defines an SLO with an error budget and uses it to make a decision.
+    - Applies resilience patterns (timeouts, bulkheads, load shedding) with evidence they help.
+    - Plans a progressive rollout (canary, feature flag) with abort criteria.
+  L4:
+    - Leads an incident as commander and coordinates others.
+    - Designs and runs a game day and turns findings into tracked work.
+    - Reviews postmortems for systemic causes and follows the action items to done.
+
+SEC:
+  name: Security
+  L1:
+    - Keeps secrets out of code and git and uses environment variables or a secrets file correctly.
+    - Validates and escapes all external input.
+    - Explains SQL injection and prevents it with parameters.
+  L2:
+    - Implements authentication and authorisation checks in handlers and tests them.
+    - Hashes passwords correctly and signs and verifies tokens.
+    - Runs `govulncheck` and acts on the results.
+  L3:
+    - Maps a feature against the OWASP API Top 10 and fixes gaps.
+    - Applies least privilege to a service (database role, Kubernetes RBAC).
+    - Produces an SBOM and signs a container image.
+  L4:
+    - Writes a threat model (STRIDE or similar) for a new feature and drives its mitigations.
+    - Reviews a change for security impact and explains the attack.
+    - Designs key rotation and secret management for a service.
+
+PLAT:
+  name: Platform and infrastructure
+  L1:
+    - Runs a service in a container and explains image, container and layer.
+    - Reads a CI workflow and explains each step.
+    - Uses environment-based configuration for a twelve-factor app.
+  L2:
+    - Writes a multi-stage Dockerfile and a Compose file with healthchecks.
+    - Writes a CI job for build, test and lint with caching.
+    - Explains what happens when a container is OOM-killed.
+  L3:
+    - Deploys to Kubernetes with Deployment, Service, ConfigMap, probes and resource limits.
+    - Builds a pipeline with image build, scan and deploy to a kind cluster.
+    - Debugs a crash loop with `kubectl describe` and logs.
+  L4:
+    - Designs a golden path (template, pipeline, defaults) other teams can adopt.
+    - Writes a simple Kubernetes operator or controller for a real need.
+    - Manages infrastructure as code (Terraform or OpenTofu) with plan review and cost awareness.
+
+AIE:
+  name: AI-assisted engineering
+  L1:
+    - Understands the AI-use policy and does not use AI on owned work at this level.
+    - Can explain every line of code they submit.
+    - Describes what AI tools are good and bad at, from reading, not from using them on tickets.
+  L2:
+    - Follows the closed-book rules and can code without assistance under time pressure.
+    - Evaluates AI-generated explanations critically when allowed for reading code.
+    - Keeps a log of where understanding was weak and what was done about it.
+  L3:
+    - Uses AI for boilerplate and tests with disclosure and reviews every line.
+    - Finds and fixes a bug in AI-written code and records what the prompt lacked.
+    - Writes a precise specification a model can follow, and tests the result against it.
+  L4:
+    - Specifies, reviews and corrects AI-written code at the level of a design and a diff.
+    - Sets team guidance for AI use and measures its effect on quality.
+    - Spots characteristic AI failure modes (plausible but wrong APIs, over-abstraction, missing edge cases) in review.
+
+COMM:
+  name: Communication and collaboration
+  L1:
+    - Writes a clear PR description (what, why, how tested).
+    - Replies to every review comment with a specific response.
+    - Asks for help with a clear statement of what was tried.
+  L2:
+    - Writes clear commit messages and issue comments that a stranger can follow.
+    - Gives a useful code review comment (problem, reason, question).
+    - Estimates a ticket and explains the variance afterwards.
+  L3:
+    - Writes a design doc a reviewer can approve without a meeting.
+    - Explains a technical trade-off to a non-engineer in business terms.
+    - Gives feedback on a teammate's PR that changes their approach, not just the code.
+  L4:
+    - Mentors a junior through a hard problem without giving the answer.
+    - Aligns stakeholders on a plan and handles disagreement with evidence.
+    - Writes a promotion-quality account of their own impact with evidence links.

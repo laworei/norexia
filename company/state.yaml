@@ -1,0 +1,16 @@
+# Company state. Read by every persona. Written by eng-manager, sre-lead and the session wrap-up.
+quarter: 1
+quarter_name: Launch hardening
+okrs:
+  - id: O1
+    text: Backup success rate >= 99% for all paid projects
+  - id: O2
+    text: Self-serve billing live for the Team plan, with no manual invoices
+  - id: O3
+    text: Public API v1 documented and stable
+on_call:
+  enabled: false        # turns on at L2
+  window: sat-sun 09:00-19:00 Europe/Berlin
+active_incidents: []
+persona_notes: {}       # persona -> short running notes (what they asked for, open disagreements)
+last_updated: 2026-11-14

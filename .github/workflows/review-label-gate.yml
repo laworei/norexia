@@ -1,0 +1,44 @@
+name: review-label-gate
+
+# No bot account, so persona reviews are recorded with labels.
+# PRs that touch learner-owned paths cannot merge without `review:approved`
+# and must not carry `review:changes-requested`. New commits reset the approval.
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, labeled, unlabeled]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Reset approval when new commits arrive
+        if: github.event.action == 'synchronize'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: gh pr edit "$PR" --repo "$GITHUB_REPOSITORY" --remove-label "review:approved" || true
+      - name: Check review label
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          files=$(gh pr diff "$PR" --repo "$GITHUB_REPOSITORY" --name-only)
+          if ! echo "$files" | grep -Eq '^(services|cmd|internal|pkg|platform|docs/rfcs|docs/postmortems)/'; then
+            echo "No learner-owned paths touched; no persona review required."
+            exit 0
+          fi
+          labels=$(gh pr view "$PR" --repo "$GITHUB_REPOSITORY" --json labels --jq '.labels[].name')
+          if echo "$labels" | grep -qx "review:changes-requested"; then
+            echo "::error::Changes requested. Address the review comments and run /review again."
+            exit 1
+          fi
+          if ! echo "$labels" | grep -qx "review:approved"; then
+            echo "::error::Missing label review:approved. Run /review <PR#> in Claude Code."
+            exit 1
+          fi
+          echo "Approved."

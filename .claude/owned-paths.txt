@@ -1,0 +1,13 @@
+# Learner-owned paths (relative to repo root). Claude and subagents must NEVER create or edit anything here.
+# One path per line. A trailing slash means "directory and everything under it".
+# Read by .claude/hooks/guard_owned_paths.py. Mirrored as Edit() deny rules in .claude/settings.json.
+services/
+cmd/
+internal/
+pkg/
+docs/rfcs/
+docs/postmortems/
+learner/brag-doc.md
+# platform/ becomes learner-owned at L3. On promotion to L3, uncomment the line below
+# AND add "Edit(/platform/**)" to permissions.deny in .claude/settings.json.
+# platform/

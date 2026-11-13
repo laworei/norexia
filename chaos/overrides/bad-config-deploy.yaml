@@ -1,0 +1,5 @@
+# Applied by chaos/inject/bad-config-deploy.sh on top of platform/compose.yaml.
+services:
+  snapshotd:
+    environment:
+      SNAPSHOTD_WORKERS: "0"

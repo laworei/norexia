@@ -1,0 +1,18 @@
+# golangci-lint v2 config. Strictness grows with level (see handbook/ladder.md); L1 baseline below.
+version: "2"
+run:
+  timeout: 5m
+linters:
+  default: none
+  enable:
+    - errcheck
+    - govet
+    - staticcheck
+    - unused
+    - ineffassign
+  exclusions:
+    paths:
+      - legacy   # inherited code is lint-exempt on purpose; fixing it is ticket work
+formatters:
+  enable:
+    - gofmt

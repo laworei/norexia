@@ -1,0 +1,37 @@
+diff --git a/services/api/handler.go b/services/api/handler.go
+new file mode 100644
+--- /dev/null
++++ b/services/api/handler.go
+@@ -0,0 +1,32 @@
++package api
++
++import (
++	"database/sql"
++	"encoding/json"
++	"fmt"
++	"net/http"
++)
++
++type Server struct{ db *sql.DB }
++
++// GetProject returns a project by name.
++func (s *Server) GetProject(w http.ResponseWriter, r *http.Request) {
++	name := r.URL.Query().Get("name")
++	row := s.db.QueryRow("SELECT id, name FROM projects WHERE name = '" + name + "'")
++	var id int
++	var n string
++	row.Scan(&id, &n)
++	json.NewEncoder(w).Encode(map[string]any{"id": id, "name": n})
++}
++
++// CreateProject creates a project from a JSON body.
++func (s *Server) CreateProject(w http.ResponseWriter, r *http.Request) {
++	var in struct{ Name string }
++	json.NewDecoder(r.Body).Decode(&in)
++	_, err := s.db.Exec("INSERT INTO projects(name) VALUES($1)", in.Name)
++	if err != nil {
++		fmt.Fprintf(w, "error: %v", err)
++		return
++	}
++	w.WriteHeader(http.StatusCreated)
++}

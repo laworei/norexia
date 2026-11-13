@@ -1,0 +1,28 @@
+diff --git a/internal/client/fetch.go b/internal/client/fetch.go
+new file mode 100644
+--- /dev/null
++++ b/internal/client/fetch.go
+@@ -0,0 +1,23 @@
++package client
++
++import (
++	"io"
++	"net/http"
++	"time"
++)
++
++// Fetch GETs a URL, retrying up to 5 times.
++func Fetch(url string) ([]byte, error) {
++	var lastErr error
++	for i := 0; i < 5; i++ {
++		resp, err := http.Get(url)
++		if err != nil {
++			lastErr = err
++			time.Sleep(10 * time.Millisecond)
++			continue
++		}
++		body, _ := io.ReadAll(resp.Body)
++		return body, nil
++	}
++	return nil, lastErr
++}

@@ -1,0 +1,32 @@
+# Learner profile. Source of truth for level, schedule and policy.
+github_user: laworei
+repo: laworei/norexia
+level: pending-diagnostic      # L0 | L1 | L2 | L3 | L4
+likely_start: L0               # from intake: "very basic" Go
+start_date: 2026-11-14
+hours_per_week: 10
+schedule:
+  days: [Sat, Sun]
+  hours_per_day: 5
+  block_minutes: [50, 90]
+  timezone: Europe/Berlin
+sprint:
+  length_weeks: 2
+  capacity_factor: 0.7
+  planned_hours: 14
+  current: 0                   # 0 = onboarding / diagnostic
+goal: pure-mastery
+target_date: null
+budget_usd_per_month: 25
+ai_policy_level: none          # none (L0-L2) | boilerplate-with-disclosure (L3) | full (L4)
+reviewer_tone: warm            # warm | neutral | blunt (honesty rules identical)
+bot_identity: label-fallback   # no second GitHub account
+environment: local             # local | compose | kind
+machine:
+  os: macOS 26 (arm64)
+  cpu: Apple M4 Pro, 14 cores
+  ram_gb: 24
+toolchain:
+  go_installed: 1.25.5
+  go_target: 1.27.4            # current stable as of 2026-11-14; upgrade during onboarding
+paused: false

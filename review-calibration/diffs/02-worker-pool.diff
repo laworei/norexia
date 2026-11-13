@@ -1,0 +1,32 @@
+diff --git a/services/worker/pool.go b/services/worker/pool.go
+new file mode 100644
+--- /dev/null
++++ b/services/worker/pool.go
+@@ -0,0 +1,27 @@
++package worker
++
++import "sync"
++
++// Process runs fn over every item concurrently and returns the results.
++func Process(items []string, fn func(string) (string, error)) []string {
++	var wg sync.WaitGroup
++	results := make(chan string)
++	for _, it := range items {
++		go func() {
++			wg.Add(1)
++			defer wg.Done()
++			out, err := fn(it)
++			if err != nil {
++				return
++			}
++			results <- out
++		}()
++	}
++	wg.Wait()
++	close(results)
++	var all []string
++	for r := range results {
++		all = append(all, r)
++	}
++	return all
++}

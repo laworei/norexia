@@ -1,0 +1,212 @@
+#!/usr/bin/env python3
+"""Validate learner/ and company/ state files against handbook/state-schemas.md.
+
+Usage: scripts/validate-state        (exit 0 = valid, 1 = errors printed to stderr)
+Requires: PyYAML
+"""
+import csv
+import datetime
+import json
+import os
+import sys
+
+import yaml
+
+ROOT = os.path.realpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+errors: list[str] = []
+
+
+def err(msg: str):
+    errors.append(msg)
+
+
+def p(*parts):
+    return os.path.join(ROOT, *parts)
+
+
+def load_yaml(path):
+    try:
+        with open(path, encoding="utf-8") as f:
+            return yaml.safe_load(f)
+    except FileNotFoundError:
+        err(f"{os.path.relpath(path, ROOT)}: missing")
+    except yaml.YAMLError as e:
+        err(f"{os.path.relpath(path, ROOT)}: invalid YAML: {e}")
+    return None
+
+
+def is_date(v) -> bool:
+    if isinstance(v, (datetime.date, datetime.datetime)):
+        return True
+    try:
+        datetime.date.fromisoformat(str(v))
+        return True
+    except ValueError:
+        return False
+
+
+def jsonl(path):
+    rows = []
+    if not os.path.exists(path):
+        return rows  # optional until first use
+    with open(path, encoding="utf-8") as f:
+        for i, line in enumerate(f, 1):
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                rows.append((i, json.loads(line)))
+            except json.JSONDecodeError as e:
+                err(f"{os.path.relpath(path, ROOT)}:{i}: invalid JSON: {e}")
+    return rows
+
+
+def need(obj, keys, where):
+    for k in keys:
+        if not isinstance(obj, dict) or k not in obj:
+            err(f"{where}: missing key '{k}'")
+
+
+def check_profile():
+    d = load_yaml(p("learner", "profile.yaml"))
+    if d is None:
+        return
+    need(d, ["github_user", "repo", "level", "start_date", "hours_per_week", "schedule", "sprint", "goal",
+             "ai_policy_level", "reviewer_tone", "paused"], "learner/profile.yaml")
+    if d.get("level") not in {"pending-diagnostic", "L0", "L1", "L2", "L3", "L4"}:
+        err(f"learner/profile.yaml: bad level {d.get('level')!r}")
+    if d.get("ai_policy_level") not in {"none", "boilerplate-with-disclosure", "full"}:
+        err(f"learner/profile.yaml: bad ai_policy_level {d.get('ai_policy_level')!r}")
+    if d.get("reviewer_tone") not in {"warm", "neutral", "blunt"}:
+        err(f"learner/profile.yaml: bad reviewer_tone {d.get('reviewer_tone')!r}")
+    if not isinstance(d.get("paused"), bool):
+        err("learner/profile.yaml: paused must be a boolean")
+    if not isinstance(d.get("hours_per_week"), (int, float)):
+        err("learner/profile.yaml: hours_per_week must be a number")
+
+
+STATES = {"not-seen", "assisted", "independent", "teaches"}
+
+
+def check_competencies() -> set:
+    d = load_yaml(p("learner", "competencies.yaml"))
+    codes = set()
+    if not d or "subcodes" not in d:
+        err("learner/competencies.yaml: missing 'subcodes'")
+        return codes
+    matrix = load_yaml(p("handbook", "matrix.yaml")) or {}
+    expected = {f"{a}.{i}" for a in matrix for i in range(1, 13)}
+    for code, v in d["subcodes"].items():
+        codes.add(code)
+        w = f"learner/competencies.yaml:{code}"
+        need(v, ["area", "level", "behaviour", "state", "evidence", "last_exercised"], w)
+        if v.get("state") not in STATES:
+            err(f"{w}: bad state {v.get('state')!r}")
+        if v.get("level") not in {"L1", "L2", "L3", "L4"}:
+            err(f"{w}: bad level {v.get('level')!r}")
+        ev = v.get("evidence") or []
+        if not isinstance(ev, list):
+            err(f"{w}: evidence must be a list")
+            continue
+        if v.get("state") in {"independent", "teaches"}:
+            sprints = {e.get("sprint") for e in ev if isinstance(e, dict)}
+            if len(ev) < 2 or len(sprints) < 2:
+                err(f"{w}: state {v['state']} needs >= 2 evidence links from >= 2 distinct sprints")
+        for e in ev:
+            if not isinstance(e, dict) or not {"link", "sprint", "date"} <= set(e):
+                err(f"{w}: evidence items need link, sprint, date")
+    missing = expected - codes
+    if missing:
+        err(f"learner/competencies.yaml: missing subcodes from matrix: {sorted(missing)[:5]}...")
+    return codes
+
+
+SEV = {"blocking", "should-fix", "nit", "question", "praise"}
+OUTCOMES = {"open", "fixed", "wont-fix", "disagree-upheld", "reviewer-error"}
+
+
+def check_findings(codes: set):
+    for i, r in jsonl(p("learner", "findings.jsonl")):
+        w = f"learner/findings.jsonl:{i}"
+        need(r, ["id", "date", "pr", "file", "line", "subcode", "severity", "category", "summary",
+                 "recurrence_count", "my_reply", "resolved_sha", "disputed", "outcome"], w)
+        if r.get("severity") not in SEV:
+            err(f"{w}: bad severity {r.get('severity')!r}")
+        if r.get("outcome") not in OUTCOMES:
+            err(f"{w}: bad outcome {r.get('outcome')!r}")
+        if r.get("subcode") not in codes:
+            err(f"{w}: unknown subcode {r.get('subcode')!r}")
+        if "date" in r and not is_date(r["date"]):
+            err(f"{w}: bad date")
+
+
+def check_hints(codes: set):
+    for i, r in jsonl(p("learner", "hints.jsonl")):
+        w = f"learner/hints.jsonl:{i}"
+        need(r, ["date", "issue", "level", "subcode", "note"], w)
+        if str(r.get("level")) not in {"1", "2", "3", "4", "give-up"}:
+            err(f"{w}: bad level {r.get('level')!r}")
+        if r.get("subcode") and r["subcode"] not in codes:
+            err(f"{w}: unknown subcode {r.get('subcode')!r}")
+
+
+def check_metrics():
+    for i, r in jsonl(p("learner", "metrics.jsonl")):
+        need(r, ["sprint", "date"], f"learner/metrics.jsonl:{i}")
+
+
+def check_flashcards():
+    path = p("learner", "flashcards.csv")
+    if not os.path.exists(path):
+        return
+    with open(path, newline="", encoding="utf-8") as f:
+        r = csv.DictReader(f)
+        need({k: 1 for k in (r.fieldnames or [])}, ["id", "front", "back", "tags", "box", "due"],
+             "learner/flashcards.csv header")
+        for n, row in enumerate(r, 2):
+            if row.get("box") not in {"1", "2", "3", "4", "5"}:
+                err(f"learner/flashcards.csv:{n}: box must be 1-5")
+            if row.get("due") and not is_date(row["due"]):
+                err(f"learner/flashcards.csv:{n}: bad due date")
+
+
+def check_company():
+    d = load_yaml(p("company", "state.yaml"))
+    if d is None:
+        return
+    need(d, ["quarter", "okrs", "on_call", "active_incidents", "persona_notes", "last_updated"], "company/state.yaml")
+    if not isinstance(d.get("quarter"), int):
+        err("company/state.yaml: quarter must be an integer")
+
+
+def check_copyright():
+    """Guard against book content in git: library/ must be ignored, only reading-map.md may be tracked."""
+    import subprocess
+    try:
+        out = subprocess.run(["git", "-C", ROOT, "ls-files", "library"], capture_output=True, text=True, check=True)
+    except Exception:
+        return
+    for f in out.stdout.split():
+        if f != "library/reading-map.md":
+            err(f"{f}: tracked file under library/ (never commit books)")
+
+
+def main():
+    check_profile()
+    codes = check_competencies()
+    check_findings(codes)
+    check_hints(codes)
+    check_metrics()
+    check_flashcards()
+    check_company()
+    check_copyright()
+    if errors:
+        print("State validation FAILED:", file=sys.stderr)
+        for e in errors:
+            print(f"  - {e}", file=sys.stderr)
+        sys.exit(1)
+    print("State validation OK")
+
+
+if __name__ == "__main__":
+    main()

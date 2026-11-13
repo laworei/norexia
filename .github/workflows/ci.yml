@@ -1,0 +1,65 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: gofmt
+        run: |
+          out=$(git ls-files '*.go' | xargs gofmt -l)
+          if [ -n "$out" ]; then echo "gofmt needed on:"; echo "$out"; exit 1; fi
+      - run: go vet ./...
+      - uses: golangci/golangci-lint-action@v8
+        with:
+          version: latest
+      - run: go test -race -cover ./...
+      - name: govulncheck
+        run: |
+          go install golang.org/x/vuln/cmd/govulncheck@latest
+          govulncheck ./...
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - run: python3 scripts/coverage-floor.py
+
+  state:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - name: Validate state files
+        run: python3 scripts/validate-state
+      - name: Competency docs are up to date
+        run: |
+          python3 scripts/gen-competencies.py
+          git diff --exit-code handbook/competencies.md learner/competencies.yaml
+
+  guardrails:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Hook tests (owned-path guard)
+        run: ./scripts/test-hooks.sh
+      - name: No book content tracked
+        run: |
+          bad=$(git ls-files library | grep -v '^library/reading-map.md$' || true)
+          if [ -n "$bad" ]; then echo "Tracked files under library/:"; echo "$bad"; exit 1; fi

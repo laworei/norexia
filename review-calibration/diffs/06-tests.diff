@@ -1,0 +1,37 @@
+diff --git a/services/api/handler_test.go b/services/api/handler_test.go
+new file mode 100644
+--- /dev/null
++++ b/services/api/handler_test.go
+@@ -0,0 +1,32 @@
++package api
++
++import (
++	"testing"
++	"time"
++)
++
++var counter int
++
++func TestSlug(t *testing.T) {
++	cases := []struct {
++		in, want string
++	}{
++		{"Hello World", "hello-world"},
++		{"", ""},
++	}
++	for _, c := range cases {
++		got := slug(c.in)
++		if got != c.want {
++			t.Fatal("wrong slug")
++		}
++	}
++}
++
++func TestAsync(t *testing.T) {
++	counter = 0
++	go func() { counter++ }()
++	time.Sleep(100 * time.Millisecond)
++	if counter != 1 {
++		t.Error("not incremented")
++	}
++}

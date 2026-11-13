@@ -1,0 +1,25 @@
+diff --git a/internal/store/projects.go b/internal/store/projects.go
+new file mode 100644
+--- /dev/null
++++ b/internal/store/projects.go
+@@ -0,0 +1,20 @@
++package store
++
++import (
++	"database/sql"
++	"fmt"
++)
++
++type Store struct{ db *sql.DB }
++
++func (s *Store) Name(id int) (string, error) {
++	var name string
++	err := s.db.QueryRow("SELECT name FROM projects WHERE id=$1", id).Scan(&name)
++	if err == sql.ErrNoRows {
++		return "", fmt.Errorf("project %d not found", id)
++	}
++	if err != nil {
++		return "", fmt.Errorf("query failed: %v", err)
++	}
++	return name, nil
++}

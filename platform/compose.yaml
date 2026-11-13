@@ -1,0 +1,17 @@
+# Local environment for L2+ work. Postgres and Redis are added when tickets need them.
+name: norexia
+services:
+  snapshotd:
+    build:
+      context: ..
+      dockerfile: legacy/snapshotd/Dockerfile
+    environment:
+      SNAPSHOTD_ADDR: ":8081"
+      SNAPSHOTD_WORKERS: "4"
+    ports:
+      - "8081:8081"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8081/healthz"]
+      interval: 5s
+      timeout: 2s
+      retries: 5

@@ -1,0 +1,1432 @@
+# Learner competency state. Machine-readable. Written by agents, validated by scripts/validate-state.
+# state: not-seen | assisted | independent | teaches
+# evidence: list of {link, sprint, date, note}
+subcodes:
+  GO.1:
+    area: GO
+    level: L1
+    behaviour: Writes small programs using structs, slices, maps, methods and packages without looking up syntax.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  GO.2:
+    area: GO
+    level: L1
+    behaviour: Handles errors explicitly with `if err != nil`, wraps with %w, and checks with errors.Is/As.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  GO.3:
+    area: GO
+    level: L1
+    behaviour: Uses `go mod`, `go build`, `go run` and `go test` and can explain what each does.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  GO.4:
+    area: GO
+    level: L2
+    behaviour: Designs small interfaces at the consumer side and explains why Go prefers them.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  GO.5:
+    area: GO
+    level: L2
+    behaviour: Chooses between value and pointer receivers and slices vs arrays with stated reasons.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  GO.6:
+    area: GO
+    level: L2
+    behaviour: Writes custom error types and sentinel errors and decides when to use each.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  GO.7:
+    area: GO
+    level: L3
+    behaviour: Uses generics only where they remove duplication and says when not to.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  GO.8:
+    area: GO
+    level: L3
+    behaviour: Uses iterators, `slices`, `maps` and `cmp` from the standard library idiomatically.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  GO.9:
+    area: GO
+    level: L3
+    behaviour: Structures modules and internal packages so dependencies are visible and import cycles do not occur.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  GO.10:
+    area: GO
+    level: L4
+    behaviour: Reviews others' Go for non-idiomatic patterns and explains the underlying principle.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  GO.11:
+    area: GO
+    level: L4
+    behaviour: Evaluates a language or toolchain upgrade for risk and writes the migration plan.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  GO.12:
+    area: GO
+    level: L4
+    behaviour: Reads standard-library source to settle a design question and cites it.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TEST.1:
+    area: TEST
+    level: L1
+    behaviour: Writes table-driven unit tests with subtests and clear failure messages.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TEST.2:
+    area: TEST
+    level: L1
+    behaviour: Runs tests with `-race` and `-cover` and reads the output.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TEST.3:
+    area: TEST
+    level: L1
+    behaviour: Writes a failing test first for a bug fix, then fixes it.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TEST.4:
+    area: TEST
+    level: L2
+    behaviour: Writes integration tests against a real Postgres with testcontainers-go.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TEST.5:
+    area: TEST
+    level: L2
+    behaviour: Chooses fakes over mocks for owned interfaces and justifies the choice.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TEST.6:
+    area: TEST
+    level: L2
+    behaviour: Uses `t.Helper`, `t.Cleanup`, `t.Parallel` and golden files correctly.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TEST.7:
+    area: TEST
+    level: L3
+    behaviour: Adds fuzz tests for parsers and decoders and keeps the corpus.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TEST.8:
+    area: TEST
+    level: L3
+    behaviour: Writes benchmarks and uses `benchstat` to compare changes.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TEST.9:
+    area: TEST
+    level: L3
+    behaviour: Tests concurrent code deterministically (synchronisation, not sleeps).
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TEST.10:
+    area: TEST
+    level: L4
+    behaviour: Defines the test strategy for a feature (pyramid, contract tests, e2e) and states what is not tested.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TEST.11:
+    area: TEST
+    level: L4
+    behaviour: Finds and fixes flaky tests by root cause.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TEST.12:
+    area: TEST
+    level: L4
+    behaviour: Reviews a teammate's tests for what they fail to catch.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TOOL.1:
+    area: TOOL
+    level: L1
+    behaviour: Uses git for branch, commit, rebase and conflict resolution without help.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TOOL.2:
+    area: TOOL
+    level: L1
+    behaviour: Navigates the shell fluently (find, grep, jq, curl, less, ps, lsof).
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TOOL.3:
+    area: TOOL
+    level: L1
+    behaviour: Runs `make check` and fixes fmt, vet and lint findings.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TOOL.4:
+    area: TOOL
+    level: L2
+    behaviour: Debugs with Delve (breakpoints, goroutines, stack inspection).
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TOOL.5:
+    area: TOOL
+    level: L2
+    behaviour: Writes a Makefile target and a small shell script that is safe (`set -euo pipefail`).
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TOOL.6:
+    area: TOOL
+    level: L2
+    behaviour: Reads `go build -x`, `go list` and `go mod graph` output to diagnose build problems.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TOOL.7:
+    area: TOOL
+    level: L3
+    behaviour: Configures golangci-lint and explains each enabled linter.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TOOL.8:
+    area: TOOL
+    level: L3
+    behaviour: Bisects a regression with `git bisect` and a failing test.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TOOL.9:
+    area: TOOL
+    level: L3
+    behaviour: Automates a repetitive workflow as a tool the team can reuse.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TOOL.10:
+    area: TOOL
+    level: L4
+    behaviour: Sets team conventions for tooling and CI and documents the trade-offs.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TOOL.11:
+    area: TOOL
+    level: L4
+    behaviour: Reduces CI time with evidence (caching, test splitting, selective runs).
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  TOOL.12:
+    area: TOOL
+    level: L4
+    behaviour: Evaluates an editor or toolchain change on team productivity.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CSF.1:
+    area: CSF
+    level: L1
+    behaviour: Chooses between slice, map and set for a task and states the time cost.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CSF.2:
+    area: CSF
+    level: L1
+    behaviour: Explains Big-O for loops, nested loops, sorting and hash lookups.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CSF.3:
+    area: CSF
+    level: L1
+    behaviour: Solves easy array/string/hash-map problems in Go under time pressure.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CSF.4:
+    area: CSF
+    level: L2
+    behaviour: Implements and analyses a linked list, stack, queue, heap and binary search tree.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CSF.5:
+    area: CSF
+    level: L2
+    behaviour: Explains processes, threads, virtual memory and file descriptors at a working level.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CSF.6:
+    area: CSF
+    level: L2
+    behaviour: Solves medium graph and recursion problems and explains the complexity.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CSF.7:
+    area: CSF
+    level: L3
+    behaviour: Explains page cache, fsync, buffered vs unbuffered IO and the cost of syscalls.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CSF.8:
+    area: CSF
+    level: L3
+    behaviour: Chooses a data structure for a service need (LRU cache, bloom filter, ring buffer) and justifies it.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CSF.9:
+    area: CSF
+    level: L3
+    behaviour: Reasons about memory layout, alignment and the garbage collector's effect on a data structure.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CSF.10:
+    area: CSF
+    level: L4
+    behaviour: Applies algorithmic thinking to a system-level problem (scheduling, sharding, deduplication).
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CSF.11:
+    area: CSF
+    level: L4
+    behaviour: Evaluates a storage-engine design (LSM vs B-tree) for a workload.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CSF.12:
+    area: CSF
+    level: L4
+    behaviour: Teaches a fundamental concept to a junior using a worked example.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  NET.1:
+    area: NET
+    level: L1
+    behaviour: Explains the request path from URL to response (DNS, TCP, TLS, HTTP).
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  NET.2:
+    area: NET
+    level: L1
+    behaviour: Uses curl, `dig` and browser dev tools to inspect a request.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  NET.3:
+    area: NET
+    level: L1
+    behaviour: Builds an HTTP client with explicit timeouts and closes response bodies.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  NET.4:
+    area: NET
+    level: L2
+    behaviour: Explains HTTP keep-alive, connection reuse and why `http.DefaultClient` is risky.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  NET.5:
+    area: NET
+    level: L2
+    behaviour: Sets server timeouts (read, write, idle) and explains each failure they prevent.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  NET.6:
+    area: NET
+    level: L2
+    behaviour: Reads a packet capture to confirm a retry or a reset.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  NET.7:
+    area: NET
+    level: L3
+    behaviour: Implements a gRPC service with deadlines, status codes and interceptors.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  NET.8:
+    area: NET
+    level: L3
+    behaviour: Diagnoses TLS failures (expiry, chain, SNI, mTLS) with openssl.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  NET.9:
+    area: NET
+    level: L3
+    behaviour: Explains HTTP/2 multiplexing, head-of-line blocking and when it matters.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  NET.10:
+    area: NET
+    level: L4
+    behaviour: Designs network timeouts and retry budgets across a call chain.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  NET.11:
+    area: NET
+    level: L4
+    behaviour: Evaluates load balancing strategies (L4 vs L7, client-side) for a service.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  NET.12:
+    area: NET
+    level: L4
+    behaviour: Debugs a production network issue (DNS, MTU, conntrack) from evidence.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  API.1:
+    area: API
+    level: L1
+    behaviour: Builds a JSON HTTP handler with correct status codes and a consistent error shape.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  API.2:
+    area: API
+    level: L1
+    behaviour: Validates input and rejects bad requests without panicking.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  API.3:
+    area: API
+    level: L1
+    behaviour: Documents an endpoint with an example request and response.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  API.4:
+    area: API
+    level: L2
+    behaviour: Designs resources, pagination (cursor vs offset) and filtering with stated trade-offs.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  API.5:
+    area: API
+    level: L2
+    behaviour: Implements idempotency keys for POST and explains the storage and expiry.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  API.6:
+    area: API
+    level: L2
+    behaviour: Versions an API and changes it without breaking existing clients.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  API.7:
+    area: API
+    level: L3
+    behaviour: Writes an OpenAPI spec and checks the implementation against it in CI.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  API.8:
+    area: API
+    level: L3
+    behaviour: Designs rate limiting (per key, per route) and communicates it with headers.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  API.9:
+    area: API
+    level: L3
+    behaviour: Plans a deprecation, including telemetry to know who still calls the old version.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  API.10:
+    area: API
+    level: L4
+    behaviour: Defines API guidelines for the team and reviews an API design for consistency.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  API.11:
+    area: API
+    level: L4
+    behaviour: Chooses between REST, gRPC and events for an interface and defends the choice.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  API.12:
+    area: API
+    level: L4
+    behaviour: Leads a breaking change to a public API with a migration plan and customer comms.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DATA.1:
+    area: DATA
+    level: L1
+    behaviour: Writes SELECT, INSERT, UPDATE, DELETE, JOIN and GROUP BY by hand.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DATA.2:
+    area: DATA
+    level: L1
+    behaviour: Uses `database/sql` or pgx safely (parameters, closing rows, context).
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DATA.3:
+    area: DATA
+    level: L1
+    behaviour: Designs a normalised schema for a small domain.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DATA.4:
+    area: DATA
+    level: L2
+    behaviour: Writes reversible migrations and runs them up and down safely.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DATA.5:
+    area: DATA
+    level: L2
+    behaviour: Uses transactions correctly and explains the isolation level they run at.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DATA.6:
+    area: DATA
+    level: L2
+    behaviour: Reads EXPLAIN ANALYZE and adds an index with evidence it helps.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DATA.7:
+    area: DATA
+    level: L3
+    behaviour: Explains and reproduces anomalies (lost update, write skew) under each isolation level.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DATA.8:
+    area: DATA
+    level: L3
+    behaviour: Designs a caching layer with invalidation and stampede protection.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DATA.9:
+    area: DATA
+    level: L3
+    behaviour: Plans a zero-downtime schema change (expand/contract) for a large table.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DATA.10:
+    area: DATA
+    level: L4
+    behaviour: Chooses between storage options (Postgres, Redis, object store) for a workload and justifies it.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DATA.11:
+    area: DATA
+    level: L4
+    behaviour: Designs a data model for multi-tenancy and data residency.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DATA.12:
+    area: DATA
+    level: L4
+    behaviour: Reviews a schema and query set for scaling limits and names the first bottleneck.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CONC.1:
+    area: CONC
+    level: L1
+    behaviour: Starts goroutines and uses `sync.WaitGroup` and channels correctly in a small program.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CONC.2:
+    area: CONC
+    level: L1
+    behaviour: Explains data races and uses `-race` to find one.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CONC.3:
+    area: CONC
+    level: L1
+    behaviour: Cancels work with `context` and explains goroutine lifecycle and why leaks happen.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CONC.4:
+    area: CONC
+    level: L2
+    behaviour: Protects shared state with `sync.Mutex`, `RWMutex` or `atomic` and says which and why.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CONC.5:
+    area: CONC
+    level: L2
+    behaviour: Builds a worker pool with bounded concurrency and graceful shutdown.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CONC.6:
+    area: CONC
+    level: L2
+    behaviour: Uses `errgroup` and `select` with timeouts and cancellation.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CONC.7:
+    area: CONC
+    level: L3
+    behaviour: Reads the Go memory model and explains a happens-before relationship in real code.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CONC.8:
+    area: CONC
+    level: L3
+    behaviour: Finds and fixes a goroutine leak with pprof evidence.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CONC.9:
+    area: CONC
+    level: L3
+    behaviour: Chooses between channels and mutexes with reasons, and designs backpressure.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CONC.10:
+    area: CONC
+    level: L4
+    behaviour: Reviews concurrent code for races, deadlocks and leaks that tests miss.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CONC.11:
+    area: CONC
+    level: L4
+    behaviour: Designs a concurrent pipeline with ordering, batching and failure semantics.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  CONC.12:
+    area: CONC
+    level: L4
+    behaviour: Teaches concurrency patterns and anti-patterns to others with examples.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  ARCH.1:
+    area: ARCH
+    level: L1
+    behaviour: Separates handler, service and storage code in a small program.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  ARCH.2:
+    area: ARCH
+    level: L1
+    behaviour: Names packages and functions so the code reads without comments.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  ARCH.3:
+    area: ARCH
+    level: L1
+    behaviour: Explains why a function should do one thing and refactors one that does not.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  ARCH.4:
+    area: ARCH
+    level: L2
+    behaviour: Draws package dependencies and keeps them pointing inward.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  ARCH.5:
+    area: ARCH
+    level: L2
+    behaviour: Uses dependency injection by constructor without a framework.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  ARCH.6:
+    area: ARCH
+    level: L2
+    behaviour: Writes a short ADR for a choice between two options.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  ARCH.7:
+    area: ARCH
+    level: L3
+    behaviour: Decomposes a feature into modules with clear boundaries and an explicit interface.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  ARCH.8:
+    area: ARCH
+    level: L3
+    behaviour: Applies simple domain modelling (entities, value objects, aggregates) where it pays off.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  ARCH.9:
+    area: ARCH
+    level: L3
+    behaviour: Chooses between a modular monolith and services and states the cost of splitting.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  ARCH.10:
+    area: ARCH
+    level: L4
+    behaviour: Writes an RFC with options, trade-offs, a rollout plan and an explicit non-goals section.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  ARCH.11:
+    area: ARCH
+    level: L4
+    behaviour: Identifies accidental complexity in an existing design and proposes a simpler one.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  ARCH.12:
+    area: ARCH
+    level: L4
+    behaviour: Leads an architecture review and gives feedback others can act on.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DIST.1:
+    area: DIST
+    level: L1
+    behaviour: Explains why a network call can fail in ways a function call cannot.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DIST.2:
+    area: DIST
+    level: L1
+    behaviour: Adds timeouts and bounded retries with backoff to a client call.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DIST.3:
+    area: DIST
+    level: L1
+    behaviour: Explains what "idempotent" means with an example.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DIST.4:
+    area: DIST
+    level: L2
+    behaviour: Implements retries with jitter and a circuit breaker and explains retry storms.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DIST.5:
+    area: DIST
+    level: L2
+    behaviour: Distinguishes at-most-once, at-least-once and effectively-once delivery.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DIST.6:
+    area: DIST
+    level: L2
+    behaviour: Uses a queue (NATS or Redis Streams) with acknowledgements and a dead-letter path.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DIST.7:
+    area: DIST
+    level: L3
+    behaviour: Implements the transactional outbox and an idempotent consumer.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DIST.8:
+    area: DIST
+    level: L3
+    behaviour: Explains consistency models (linearizable, eventual) with a concrete example.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DIST.9:
+    area: DIST
+    level: L3
+    behaviour: Designs a saga for a multi-step operation with compensation.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DIST.10:
+    area: DIST
+    level: L4
+    behaviour: Designs for partial failure across services and states the failure modes.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DIST.11:
+    area: DIST
+    level: L4
+    behaviour: Chooses a consistency and ordering guarantee per use case with stated costs.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  DIST.12:
+    area: DIST
+    level: L4
+    behaviour: Runs a game day to validate a distributed design under failure.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PERF.1:
+    area: PERF
+    level: L1
+    behaviour: Measures before optimising and states a hypothesis.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PERF.2:
+    area: PERF
+    level: L1
+    behaviour: Writes a Go benchmark and reads ns/op and allocs/op.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PERF.3:
+    area: PERF
+    level: L1
+    behaviour: Explains the difference between latency and throughput.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PERF.4:
+    area: PERF
+    level: L2
+    behaviour: Uses pprof (CPU and heap) to find a hot spot and proves the fix with a benchmark.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PERF.5:
+    area: PERF
+    level: L2
+    behaviour: Reduces allocations in a hot path and shows the effect.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PERF.6:
+    area: PERF
+    level: L2
+    behaviour: Runs a basic load test with k6 and reads the percentiles.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PERF.7:
+    area: PERF
+    level: L3
+    behaviour: Uses execution traces and the mutex/block profiles to diagnose contention.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PERF.8:
+    area: PERF
+    level: L3
+    behaviour: Tunes GC and memory settings with evidence and knows the risks.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PERF.9:
+    area: PERF
+    level: L3
+    behaviour: Does capacity planning from load-test data with headroom.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PERF.10:
+    area: PERF
+    level: L4
+    behaviour: Sets performance budgets and enforces them in CI.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PERF.11:
+    area: PERF
+    level: L4
+    behaviour: Leads a performance investigation across services and reports root cause with data.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PERF.12:
+    area: PERF
+    level: L4
+    behaviour: Decides what not to optimise and records the reasoning.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  OBS.1:
+    area: OBS
+    level: L1
+    behaviour: Logs with `log/slog` using key-value fields and sensible levels.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  OBS.2:
+    area: OBS
+    level: L1
+    behaviour: Explains logs, metrics and traces and what each is good for.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  OBS.3:
+    area: OBS
+    level: L1
+    behaviour: Does not log secrets or personal data.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  OBS.4:
+    area: OBS
+    level: L2
+    behaviour: Adds request-ID propagation and structured request logs.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  OBS.5:
+    area: OBS
+    level: L2
+    behaviour: Exposes Prometheus metrics (counter, gauge, histogram) with sensible labels.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  OBS.6:
+    area: OBS
+    level: L2
+    behaviour: Avoids high-cardinality labels and explains the cost.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  OBS.7:
+    area: OBS
+    level: L3
+    behaviour: Instruments with OpenTelemetry traces across a service boundary.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  OBS.8:
+    area: OBS
+    level: L3
+    behaviour: Defines SLIs for a service and builds a dashboard from them.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  OBS.9:
+    area: OBS
+    level: L3
+    behaviour: Writes alerts that page on symptoms, with a runbook link.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  OBS.10:
+    area: OBS
+    level: L4
+    behaviour: Designs observability for a new system before it ships.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  OBS.11:
+    area: OBS
+    level: L4
+    behaviour: Reduces alert noise with evidence and removes alerts that do not lead to action.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  OBS.12:
+    area: OBS
+    level: L4
+    behaviour: Uses telemetry to answer a business question, not just a technical one.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  REL.1:
+    area: REL
+    level: L1
+    behaviour: Handles shutdown signals and drains in-flight requests.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  REL.2:
+    area: REL
+    level: L1
+    behaviour: Reads a stack trace and a panic and finds the cause.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  REL.3:
+    area: REL
+    level: L1
+    behaviour: Writes a clear status update during an issue.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  REL.4:
+    area: REL
+    level: L2
+    behaviour: Acknowledges and mitigates an incident on call, then writes a blameless postmortem.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  REL.5:
+    area: REL
+    level: L2
+    behaviour: Uses health and readiness checks correctly and explains the difference.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  REL.6:
+    area: REL
+    level: L2
+    behaviour: Rolls back a bad deploy using the documented procedure.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  REL.7:
+    area: REL
+    level: L3
+    behaviour: Defines an SLO with an error budget and uses it to make a decision.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  REL.8:
+    area: REL
+    level: L3
+    behaviour: Applies resilience patterns (timeouts, bulkheads, load shedding) with evidence they help.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  REL.9:
+    area: REL
+    level: L3
+    behaviour: Plans a progressive rollout (canary, feature flag) with abort criteria.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  REL.10:
+    area: REL
+    level: L4
+    behaviour: Leads an incident as commander and coordinates others.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  REL.11:
+    area: REL
+    level: L4
+    behaviour: Designs and runs a game day and turns findings into tracked work.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  REL.12:
+    area: REL
+    level: L4
+    behaviour: Reviews postmortems for systemic causes and follows the action items to done.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  SEC.1:
+    area: SEC
+    level: L1
+    behaviour: Keeps secrets out of code and git and uses environment variables or a secrets file correctly.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  SEC.2:
+    area: SEC
+    level: L1
+    behaviour: Validates and escapes all external input.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  SEC.3:
+    area: SEC
+    level: L1
+    behaviour: Explains SQL injection and prevents it with parameters.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  SEC.4:
+    area: SEC
+    level: L2
+    behaviour: Implements authentication and authorisation checks in handlers and tests them.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  SEC.5:
+    area: SEC
+    level: L2
+    behaviour: Hashes passwords correctly and signs and verifies tokens.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  SEC.6:
+    area: SEC
+    level: L2
+    behaviour: Runs `govulncheck` and acts on the results.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  SEC.7:
+    area: SEC
+    level: L3
+    behaviour: Maps a feature against the OWASP API Top 10 and fixes gaps.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  SEC.8:
+    area: SEC
+    level: L3
+    behaviour: Applies least privilege to a service (database role, Kubernetes RBAC).
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  SEC.9:
+    area: SEC
+    level: L3
+    behaviour: Produces an SBOM and signs a container image.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  SEC.10:
+    area: SEC
+    level: L4
+    behaviour: Writes a threat model (STRIDE or similar) for a new feature and drives its mitigations.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  SEC.11:
+    area: SEC
+    level: L4
+    behaviour: Reviews a change for security impact and explains the attack.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  SEC.12:
+    area: SEC
+    level: L4
+    behaviour: Designs key rotation and secret management for a service.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PLAT.1:
+    area: PLAT
+    level: L1
+    behaviour: Runs a service in a container and explains image, container and layer.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PLAT.2:
+    area: PLAT
+    level: L1
+    behaviour: Reads a CI workflow and explains each step.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PLAT.3:
+    area: PLAT
+    level: L1
+    behaviour: Uses environment-based configuration for a twelve-factor app.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PLAT.4:
+    area: PLAT
+    level: L2
+    behaviour: Writes a multi-stage Dockerfile and a Compose file with healthchecks.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PLAT.5:
+    area: PLAT
+    level: L2
+    behaviour: Writes a CI job for build, test and lint with caching.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PLAT.6:
+    area: PLAT
+    level: L2
+    behaviour: Explains what happens when a container is OOM-killed.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PLAT.7:
+    area: PLAT
+    level: L3
+    behaviour: Deploys to Kubernetes with Deployment, Service, ConfigMap, probes and resource limits.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PLAT.8:
+    area: PLAT
+    level: L3
+    behaviour: Builds a pipeline with image build, scan and deploy to a kind cluster.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PLAT.9:
+    area: PLAT
+    level: L3
+    behaviour: Debugs a crash loop with `kubectl describe` and logs.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PLAT.10:
+    area: PLAT
+    level: L4
+    behaviour: Designs a golden path (template, pipeline, defaults) other teams can adopt.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PLAT.11:
+    area: PLAT
+    level: L4
+    behaviour: Writes a simple Kubernetes operator or controller for a real need.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  PLAT.12:
+    area: PLAT
+    level: L4
+    behaviour: Manages infrastructure as code (Terraform or OpenTofu) with plan review and cost awareness.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  AIE.1:
+    area: AIE
+    level: L1
+    behaviour: Understands the AI-use policy and does not use AI on owned work at this level.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  AIE.2:
+    area: AIE
+    level: L1
+    behaviour: Can explain every line of code they submit.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  AIE.3:
+    area: AIE
+    level: L1
+    behaviour: Describes what AI tools are good and bad at, from reading, not from using them on tickets.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  AIE.4:
+    area: AIE
+    level: L2
+    behaviour: Follows the closed-book rules and can code without assistance under time pressure.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  AIE.5:
+    area: AIE
+    level: L2
+    behaviour: Evaluates AI-generated explanations critically when allowed for reading code.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  AIE.6:
+    area: AIE
+    level: L2
+    behaviour: Keeps a log of where understanding was weak and what was done about it.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  AIE.7:
+    area: AIE
+    level: L3
+    behaviour: Uses AI for boilerplate and tests with disclosure and reviews every line.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  AIE.8:
+    area: AIE
+    level: L3
+    behaviour: Finds and fixes a bug in AI-written code and records what the prompt lacked.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  AIE.9:
+    area: AIE
+    level: L3
+    behaviour: Writes a precise specification a model can follow, and tests the result against it.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  AIE.10:
+    area: AIE
+    level: L4
+    behaviour: Specifies, reviews and corrects AI-written code at the level of a design and a diff.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  AIE.11:
+    area: AIE
+    level: L4
+    behaviour: Sets team guidance for AI use and measures its effect on quality.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  AIE.12:
+    area: AIE
+    level: L4
+    behaviour: Spots characteristic AI failure modes (plausible but wrong APIs, over-abstraction, missing edge cases) in review.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  COMM.1:
+    area: COMM
+    level: L1
+    behaviour: Writes a clear PR description (what, why, how tested).
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  COMM.2:
+    area: COMM
+    level: L1
+    behaviour: Replies to every review comment with a specific response.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  COMM.3:
+    area: COMM
+    level: L1
+    behaviour: Asks for help with a clear statement of what was tried.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  COMM.4:
+    area: COMM
+    level: L2
+    behaviour: Writes clear commit messages and issue comments that a stranger can follow.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  COMM.5:
+    area: COMM
+    level: L2
+    behaviour: Gives a useful code review comment (problem, reason, question).
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  COMM.6:
+    area: COMM
+    level: L2
+    behaviour: Estimates a ticket and explains the variance afterwards.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  COMM.7:
+    area: COMM
+    level: L3
+    behaviour: Writes a design doc a reviewer can approve without a meeting.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  COMM.8:
+    area: COMM
+    level: L3
+    behaviour: Explains a technical trade-off to a non-engineer in business terms.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  COMM.9:
+    area: COMM
+    level: L3
+    behaviour: Gives feedback on a teammate's PR that changes their approach, not just the code.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  COMM.10:
+    area: COMM
+    level: L4
+    behaviour: Mentors a junior through a hard problem without giving the answer.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  COMM.11:
+    area: COMM
+    level: L4
+    behaviour: Aligns stakeholders on a plan and handles disagreement with evidence.
+    state: not-seen
+    evidence: []
+    last_exercised: null
+  COMM.12:
+    area: COMM
+    level: L4
+    behaviour: Writes a promotion-quality account of their own impact with evidence links.
+    state: not-seen
+    evidence: []
+    last_exercised: null

@@ -1,0 +1,24 @@
+# Incident catalog. Root causes and expected signals are sealed in .sealed/incidents/<id>.md.
+# status: ready (inject + rollback scripts exist and were tested) | planned
+# Every incident has: an injection script, a rollback script, and a sealed root cause with expected signals.
+incidents:
+  # L2
+  - {id: bad-config-deploy,       level: L2, status: ready,   area: [REL, PLAT], summary: "Config change leaves jobs unprocessed"}
+  - {id: slow-query-missing-index, level: L2, status: planned, area: [DATA, PERF], summary: "A list endpoint gets slow as data grows"}
+  - {id: connection-pool-exhaustion, level: L2, status: planned, area: [DATA, CONC], summary: "Requests time out under moderate load"}
+  - {id: crash-loop,               level: L2, status: planned, area: [REL, PLAT], summary: "Service restarts repeatedly after a deploy"}
+  - {id: failed-migration,         level: L2, status: planned, area: [DATA, REL], summary: "A migration stops half-way"}
+  # L3
+  - {id: goroutine-leak,           level: L3, status: planned, area: [CONC, PERF], summary: "Memory and goroutine count climb"}
+  - {id: memory-leak,              level: L3, status: planned, area: [PERF, OBS], summary: "Pods OOM-killed every few hours"}
+  - {id: retry-storm,              level: L3, status: planned, area: [DIST, REL], summary: "A small blip turns into a sustained overload"}
+  - {id: cache-stampede,           level: L3, status: planned, area: [DATA, DIST], summary: "Database spikes when a hot key expires"}
+  - {id: timeout-dns-misconfig,    level: L3, status: planned, area: [NET, REL], summary: "Intermittent slow calls to a dependency"}
+  - {id: expired-certificate,      level: L3, status: planned, area: [NET, SEC], summary: "Calls to an internal service start failing"}
+  - {id: dependency-cve,           level: L3, status: planned, area: [SEC, PLAT], summary: "A scanner flags a critical vulnerability"}
+  # L4
+  - {id: duplicate-processing,     level: L4, status: planned, area: [DIST, API], summary: "Customers are charged or notified twice"}
+  - {id: poison-message,           level: L4, status: planned, area: [DIST, REL], summary: "One bad message blocks a queue"}
+  - {id: partial-outage,           level: L4, status: planned, area: [REL, DIST], summary: "One region or tenant slice is down"}
+  - {id: data-inconsistency,       level: L4, status: planned, area: [DATA, DIST], summary: "Ledger and invoices disagree; reconciliation needed"}
+  - {id: cost-spike,               level: L4, status: planned, area: [PLAT, PERF], summary: "Storage or egress bill jumps"}

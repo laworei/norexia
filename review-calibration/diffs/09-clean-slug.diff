@@ -1,0 +1,30 @@
+diff --git a/services/api/slug.go b/services/api/slug.go
+new file mode 100644
+--- /dev/null
++++ b/services/api/slug.go
+@@ -0,0 +1,25 @@
++package api
++
++import (
++	"strings"
++	"unicode"
++)
++
++// slug converts a project name to a URL-safe slug: lower case, letters and digits kept,
++// runs of anything else collapsed to a single hyphen, no leading or trailing hyphen.
++func slug(s string) string {
++	var b strings.Builder
++	pendingHyphen := false
++	for _, r := range s {
++		if unicode.IsLetter(r) || unicode.IsDigit(r) {
++			if pendingHyphen && b.Len() > 0 {
++				b.WriteByte('-')
++			}
++			pendingHyphen = false
++			b.WriteRune(unicode.ToLower(r))
++			continue
++		}
++		pendingHyphen = true
++	}
++	return b.String()
++}
