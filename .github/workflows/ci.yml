@@ -15,7 +15,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version-file: go.mod
+          # go.mod holds the minimum language version; CI uses the latest stable toolchain so
+          # govulncheck does not flag already-fixed standard-library vulnerabilities.
+          go-version: stable
       - name: gofmt
         run: |
           out=$(git ls-files '*.go' | xargs gofmt -l)
