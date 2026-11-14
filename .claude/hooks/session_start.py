@@ -78,6 +78,28 @@ def main():
                     pass
     lines.append(f"Flashcards due: {due}")
 
+    # Deep-work scoreboard for the current ISO week
+    try:
+        y, w, _ = today.isocalendar()
+        deep = 0
+        sessions = 0
+        dlog = os.path.join(ROOT, "learner", "deepwork-log.jsonl")
+        if os.path.exists(dlog):
+            with open(dlog, encoding="utf-8") as f:
+                for line in f:
+                    if not line.strip():
+                        continue
+                    r = json.loads(line)
+                    ry, rw, _ = datetime.date.fromisoformat(r["date"]).isocalendar()
+                    if (ry, rw) == (y, w):
+                        deep += r["deep_min"]
+                        sessions += 1
+        target = (prof.get("deep_work") or {}).get("weekly_deep_minutes_target", 0)
+        lines.append(f"Deep work this week: {deep}/{target} min over {sessions} session(s). "
+                     "Start with /session-start (free recall first); end with /session-end.")
+    except Exception:
+        pass
+
     jr = os.path.join(ROOT, "learner", "journal.md")
     if os.path.exists(jr):
         with open(jr, encoding="utf-8") as f:

@@ -4,18 +4,20 @@ You join **Norexia**, a fictional managed-backend company (Postgres, auth, stora
 
 Design: `docs/PROGRAM.md`. Full spec: `ULTRALEARNING_BRIEF.md`. The world: `company/WORLD.md`.
 
-## How a session works
-1. Open Claude Code in this folder. The session-start summary shows your level, open work and flashcards due.
-2. Work **one ticket at a time** (WIP limit 1) in 50-90 minute blocks. You write the code; Claude never does.
-3. Run `make check`. Open a PR from a branch. Use the PR template.
-4. `/review <PR#>` for the staff-engineer's review. Reply to every `blocking` and `should-fix` comment, then merge when `review:approved` is set.
-5. Stuck? Try 30 minutes (60 from L2), then `/stuck <issue>`.
+## How a session works (Deep Work + Ultralearning)
+1. **Start ritual** (`handbook/deep-work.md`): phone away, blocker on, then `/session-start`. It starts with 5 minutes of **free recall** of last session, before any notes.
+2. **Two deep blocks of 90 minutes** on **one ticket** (WIP limit 1). You write the code; Claude never does. Breaks are for boredom, not feeds.
+3. **Shallow block**: PR replies, flashcards, CI. Run `make check`; open a PR; `/review <PR#>`; reply to every `blocking` and `should-fix` comment; merge when `review:approved` is set.
+4. Stuck? Try 30 minutes (60 from L2), predict what should happen, then `/stuck <issue>`.
+5. **Shutdown ritual**: `/session-end` logs deep minutes, does free recall, makes flashcards, and writes the next action. Then stop.
 
 ## Commands
-`/status` `/plan-sprint` `/standup` `/review <pr>` `/stuck <issue>` `/give-up <id>` `/one-on-one` `/explain-back <pr>` `/retro` `/incident` `/postmortem-review <file>` `/flashcards` `/calibrate-reviewer` `/promo` `/perf-review` `/pause` `/resume`
+`/session-start` `/session-end` `/weekly-review` `/status` `/plan-sprint` `/standup` `/review <pr>` `/stuck <issue>` `/give-up <id>` `/one-on-one` `/explain-back <pr>` `/retro` `/incident` `/postmortem-review <file>` `/flashcards` `/calibrate-reviewer` `/promo` `/perf-review` `/pause` `/resume`
 
 ## Rhythm
-2-week sprints, Sat+Sun, ~10 h/week (14 planned hours per sprint). Sprint ritual: `/plan-sprint` -> work -> `/retro`. Weekly `/one-on-one` with an explain-back. A bad week is fine: do one drill and one flashcard session (the minimum viable week), or `/pause`.
+2-week sprints, Sat+Sun, ~10 h/week (14 planned hours per sprint, about 4 deep hours per week to start, ramping). Each sprint has a **Wildly Important Goal**, **lead measures** (deep minutes, retrieval sessions, drills) and **lag measures** (competencies, approval rate), and one **method experiment**. Ritual: `/plan-sprint` -> work -> `/weekly-review` -> `/retro`. A bad week is fine: do one drill and one flashcard session (the minimum viable week), or `/pause`.
+
+Method docs: `handbook/deep-work.md` and `handbook/learning-method.md`. Design rationale: `docs/PROGRAM.md` §6a.
 
 ## First steps
 1. Read `handbook/` (start with `handbook/ladder.md`, `handbook/ai-policy.md`, `handbook/hint-ladder.md`).

@@ -4,6 +4,16 @@
 
 **Dates:** the two weekends after Sprint 0 · **Capacity:** 10 h/week x 2 x 0.7 = **14 h planned** · **WIP limit:** 1 · **Quarter:** Q1, Launch hardening (OKR O1: backup success >= 99%; O3: API v1)
 
+## Method layer (Ultralearning + Deep Work)
+- **Wildly Important Goal:** "By the end of Sprint 1, a running `norexia-api` serves `GET /projects/{id}` with validated names and a tested report CLI, all merged with first-pass approval at 50% or better." (lag: merged tickets, approval rate)
+- **Lead measures:** 240 deep minutes in each of the two weeks (the target ramps +30 per sprint from Sprint 2 if you hit 90% of it); 2 retrieval sessions per week (free recall at start and end of each session counts); 6 flashcards added per week; at least 2 uninterrupted 90-minute blocks per weekend.
+- **Drill:** S1-4 uses the proactive types: *isolate-and-repeat* on the weakest sub-skill from the diagnostic, in 20-minute reps.
+- **Spaced regression:** a 20-minute re-do of DIAG-2's error-handling idea inside S1-2 (no looking at old code).
+- **Test before study:** before each reading pointer, write down what you expect it says (5 min), then read; the gap is the lesson.
+- **North-star increment:** S1-1 to S1-3 together are the first end-to-end slice of your API v1.
+- **Method experiment (E1):** *test-first vs code-first.* Do S1-1 test-first and S1-2 code-first (or the reverse, your choice up front). Measure: review rounds, time to green, number of bugs found in review. Decision at the retro.
+- **Depth tagging:** S1-1, S1-2, S1-3, S1-4, S1-5 are deep. PR replies and flashcard sessions are shallow; keep them under 25%.
+
 ## Mix (L1: 60% delivery, 25% drill, 15% retrieval) and difficulty reasoning
 | Slice | Hours | Tickets |
 |---|---|---|

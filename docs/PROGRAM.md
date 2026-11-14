@@ -79,6 +79,31 @@ Order of work, after approval. Each step ends with its own verification.
 
 Phase 3 then runs the 10-item acceptance checklist and reports a pass/fail table. Phase 4 does onboarding, the diagnostic sprint and a Sprint 1 preview, with issues created only after approval.
 
+## 6a. Method design (v2, 2026-11-14): Ultralearning and Deep Work
+
+**Why this revision.** The first design mapped Scott Young's nine principles onto tickets and reviews but left several of them thin, and applied almost none of Cal Newport's *Deep Work*. Gaps closed in v2: no deep-work protocol, no session rituals or shutdown routine, no depth measurement or lead/lag scoreboard; no up-front metalearning project (the competency matrix was drafted from general knowledge of public ladders, not benchmarked against real job posts); retrieval only through flashcards and occasional closed-book tickets; experimentation delayed to L3; intuition reduced to "one project per level".
+
+| Principle / rule | Practice | Where | Measured by |
+|---|---|---|---|
+| **Metalearning** | Why/what/how map and benchmark against 8-10 job posts and 2-3 career ladders in Sprint 0 (MET-1); monthly review; <= 10% of hours | `handbook/templates/metalearning.md`, `learner/metalearning.md`, `docs/plan-reviews/` | Plan changes recorded; time share |
+| **Focus / Deep Work** | Rhythmic weekend schedule, start and shutdown rituals, 2 x 90 min deep blocks, shallow work batched and capped at 25%, boredom training in breaks, fixed-schedule stop | `handbook/deep-work.md`, `/session-start`, `/session-end` | **Deep minutes per week (lead)**; interruptions; focus 1-5 |
+| **Directness** | Real tickets in a real repo; a north-star project (the learner's API v1) that runs end to end from Sprint 1 | `docs/sprints/` | >= 60% of time on real tickets |
+| **Drill** | Reactive (2+ findings in 30 days) and proactive drill types: isolate-and-repeat, DIRT, copycat, time-slicing, cognitive components | `handbook/learning-method.md` §4 | Drill reps; recurring-finding rate (lag) |
+| **Retrieval** | Free recall at the start and end of every session, test-before-study on readings, closed-book tickets, explain-back, flashcards | `/session-start`, `/session-end`, `/flashcards` | Retrieval sessions/week (lead); flashcard retention (lag) |
+| **Feedback** | CI, review, reality; "do not dodge the punch"; informational plus corrective | `handbook/review-guide.md` | Cycle time; review rounds |
+| **Retention** | Spaced cards (1/3/7/21/60 days), spaced regression every ~6 weeks, overlearn fundamentals | `scripts/flashcards.py`, sprint plans | Cards mature; regression tickets passed |
+| **Intuition** | Predict before you run, Feynman write-ups, build-from-scratch project per level, read stdlib source, prove claims to yourself | `docs/explainers/` | Explain-back quality |
+| **Experimentation** | One **method experiment per sprint from Sprint 1** (not L3), plus technical spikes from L3 | `learner/experiments.md`, `/retro` | Experiments run and decided |
+| **Newport: execute like a business** | Wildly Important Goal per sprint, lead and lag measures, a visible scoreboard, weekly review and commitment | `/plan-sprint`, `/weekly-review`, `scripts/deepwork.py` | Scoreboard review each week |
+
+**Deep-work target ramp (beginner-appropriate).** Weekly deep minutes start at 240 (4 h), +30 per sprint if the last sprint reached at least 90% of target, capped at 420 (7 h). A weekend day with two honest 90-minute deep blocks is a success. This is a lead measure, not a goal to hit by logging shallow work as deep: the log is for you.
+
+**Session shape (about 5 h/day, Sat and Sun).** Start ritual and free recall (10 min), deep block A (90), break (15), deep block B (90), break (15), shallow block (60), shutdown ritual (15-20). See `handbook/deep-work.md`.
+
+**Implication for earlier sections.** §4 weekly rhythm is superseded by the session shape above. Hint-ladder timeboxes now double as the "don't give up too early" rule (intuition) and the "predict before you run" habit is expected before asking for help. Sprint plans must include a WIG, lead measures, a drill, a regression item, a method experiment and a north-star increment (`/plan-sprint` enforces this).
+
+**Open validity limits.** Deep-minute counts are self-reported (honor system). The matrix is still unvalidated against job posts until MET-1 is done. Method experiments with n=1 are anecdotes, so decisions are provisional and retested.
+
 ## 6. Resolved items and notes
 
 All Phase 1 open items are resolved: weekends (Sat+Sun), public repo, very basic Go, username `laworei`, Docker daemon running, and 24 books uploaded to `library/`.

@@ -17,6 +17,12 @@ Required keys: `github_user`, `repo`, `level` (`pending-diagnostic|L0|L1|L2|L3|L
 ## `learner/metrics.jsonl` (per sprint)
 `sprint` (int), `date`, `first_pass_approval` (0-1), `avg_review_rounds`, `avg_cycle_time_hours`, `hints_total`, `recurring_findings`, `flashcard_retention`, `paused` (bool, optional), `notes`.
 
+## `learner/deepwork-log.jsonl` (one line per session; written by `scripts/deepwork.py log`)
+`date`, `deep_min`, `shallow_min`, `blocks`, `interruptions` (non-negative ints), `focus` (int 1-5), `ticket` (string or null), `note`. `learner/profile.yaml` must have `deep_work.weekly_deep_minutes_target` (int).
+
+## `learner/experiments.md` and `learner/metalearning.md`
+Free-form, written by the learner (templates: `handbook/templates/metalearning.md`; experiments table described in `handbook/learning-method.md` §9). Not schema-validated.
+
 ## `learner/flashcards.csv`
 Header `id,front,back,tags,box,due`. `box` 1-5, `due` is a date. Anki-importable (`front`, `back`, `tags`).
 

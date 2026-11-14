@@ -155,6 +155,23 @@ def check_metrics():
         need(r, ["sprint", "date"], f"learner/metrics.jsonl:{i}")
 
 
+def check_deepwork():
+    for i, r in jsonl(p("learner", "deepwork-log.jsonl")):
+        w = f"learner/deepwork-log.jsonl:{i}"
+        need(r, ["date", "deep_min", "shallow_min", "blocks", "interruptions", "focus"], w)
+        if "date" in r and not is_date(r["date"]):
+            err(f"{w}: bad date")
+        for k in ("deep_min", "shallow_min", "blocks", "interruptions"):
+            if not isinstance(r.get(k), int) or r.get(k) < 0:
+                err(f"{w}: {k} must be a non-negative integer")
+        if not isinstance(r.get("focus"), int) or not 1 <= r["focus"] <= 5:
+            err(f"{w}: focus must be an integer 1-5")
+    prof = load_yaml(p("learner", "profile.yaml")) or {}
+    dw = prof.get("deep_work")
+    if not isinstance(dw, dict) or not isinstance(dw.get("weekly_deep_minutes_target"), int):
+        err("learner/profile.yaml: deep_work.weekly_deep_minutes_target (int) is required")
+
+
 def check_flashcards():
     path = p("learner", "flashcards.csv")
     if not os.path.exists(path):
@@ -197,6 +214,7 @@ def main():
     check_findings(codes)
     check_hints(codes)
     check_metrics()
+    check_deepwork()
     check_flashcards()
     check_company()
     check_copyright()

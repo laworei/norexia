@@ -29,4 +29,10 @@ machine:
 toolchain:
   go_installed: 1.25.5
   go_target: 1.27.4            # current stable as of 2026-11-14; upgrade during onboarding
+deep_work:
+  weekly_deep_minutes_target: 240   # ramps +30 per sprint to a cap of 420 (see handbook/deep-work.md)
+  ramp_per_sprint_min: 30
+  cap_min: 420
+  free_recall_each_session: true
+  method_experiment_each_sprint: true
 paused: false
